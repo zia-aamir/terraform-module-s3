@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "this" {
 }
 
 resource "aws_s3_bucket_versioning" "this" {
-  bucket = "myapp-dev-assets-${var.environment}-${timestamp()}"
+  bucket = "myapp-dev-assets-${var.environment}-${replace(timestamp(), "[:TZ]", "-")}"
 
   versioning_configuration {
     status = var.environment == "prod" ? "Enabled" : "Suspended"
